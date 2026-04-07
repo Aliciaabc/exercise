@@ -4,12 +4,12 @@ public class RegisteredUsers {
     private String fullName;
     private String emailAddress;
     private String dateOfBirth;
-    private long cardNumber;          
+    private long cardNumber;
     private String cardExpiryDate;
     private String cardProvider;
     private int cvv;
     private String userType;
-    private String[] lastThreeTrips;   
+    private String[] lastThreeTrips;
 
     // 构造器
     public RegisteredUsers(String fullName, String emailAddress, String dateOfBirth,
@@ -26,7 +26,17 @@ public class RegisteredUsers {
         this.lastThreeTrips = lastThreeTrips;
     }
 
-    
+    // 新增：计算基础费用（供子类重写）
+    public double calculateFare(double baseFare) {
+        return baseFare;
+    }
+
+    // 新增：显示用户类型
+    public void displayUserType() {
+        System.out.println("Regular User");
+    }
+
+    // ---------- getters / setters (保持不变) ----------
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
 
@@ -54,7 +64,6 @@ public class RegisteredUsers {
     public String[] getLastThreeTrips() { return lastThreeTrips; }
     public void setLastThreeTrips(String[] lastThreeTrips) { this.lastThreeTrips = lastThreeTrips; }
 
-    
     @Override
     public String toString() {
         return "RegisteredUsers{" +

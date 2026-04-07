@@ -1,30 +1,30 @@
-import java.util.Scanner;
-
 public class AdminPanel {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        BikeRental bikeRental = new BikeRental();
+    private UserService userService;
+    private RentalService rentalService;
 
-        int choice;
-        do {
-            System.out.println("\n--- Admin Panel ---");
-            System.out.println("1. Demo the Bike Rental System");
-            System.out.println("2. Exit");
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
+    public AdminPanel() {
+        userService = new UserService();
+        rentalService = new RentalService();
+    }
 
-            switch (choice) {
-                case 1:
-                    bikeRental.simulateApplicationInput();
-                    break;
-                case 2:
-                    System.out.println("Exiting...");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Try again.");
-            }
-        } while (choice != 2);
+    // 模拟添加新用户并启动租车流程
+    public void addNewUserAndStartRental() {
+        // 假设从界面获取的输入
+        String fullName = "John Doe";
+        String email = "john@example.com";
+        String dob = "1990-01-01";
+        long cardNum = 1234567812345678L;
+        String expiry = "12/28";
+        String provider = "Visa";
+        int cvv = 123;
+        String userType = "VIP";   // 或 "Regular"
+        String[] trips = new String[3];
 
-        scanner.close();
+        // 调用 UserService 创建用户（多态对象）
+        RegisteredUsers newUser = userService.addNewUsers(fullName, email, dob,
+                cardNum, expiry, provider, cvv, userType, trips);
+
+        // 将用户对象传递给 RentalService 进行模拟
+        rentalService.simulateApplicationInput(newUser);
     }
 }
